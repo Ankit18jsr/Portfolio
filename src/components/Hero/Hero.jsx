@@ -24,7 +24,7 @@ export default function Hero() {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 0.8, x: 0 }}
         transition={{ duration: 1.5, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute right-[-10%] md:right-12 top-1/2 -translate-y-1/2 w-[70vw] md:w-[35vw] max-w-[600px] h-[70vh] pointer-events-none z-0"
+        className="absolute left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-12 top-1/2 -translate-y-1/2 w-[80vw] md:w-[35vw] max-w-[600px] h-[70vh] pointer-events-none z-0"
         style={{ y }}
       >
         {/* Gradients to seamlessly fade the image edges into the background */}
@@ -35,7 +35,7 @@ export default function Hero() {
         <img
           src={heroImage}
           alt="Ankit Portrait"
-          className="w-full h-full object-contain object-right md:object-center opacity-90"
+          className="w-full h-full object-contain object-center opacity-90"
         />
       </motion.div>
       <motion.div
