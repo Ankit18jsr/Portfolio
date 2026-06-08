@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Magnetic from '../Magnetic/Magnetic';
 import weatherDashboardImg from '../../assets/weather_dashboard.png';
@@ -53,6 +53,16 @@ const projects = [
 export default function Projects() {
   const containerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
@@ -63,13 +73,13 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" ref={containerRef} className="min-h-screen py-32 px-6 flex flex-col justify-center relative overflow-hidden bg-[#050505]">
+    <section id="projects" ref={containerRef} className="min-h-screen py-20 sm:py-32 px-4 sm:px-6 flex flex-col justify-center relative overflow-hidden bg-[#050505]">
       {/* Background Soft Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-white/2 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full relative z-10 flex flex-col items-center">
         {/* Header Tagline */}
-        <div className="flex flex-col items-center mb-16 text-center">
+        <div className="flex flex-col items-center mb-10 sm:mb-16 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -92,16 +102,16 @@ export default function Projects() {
         <div className="relative w-full flex items-center justify-center px-4 md:px-16">
 
           {/* Navigation Arrows Container */}
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between items-center pointer-events-none z-50 px-2 sm:px-4 md:px-12">
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between items-center pointer-events-none z-50 px-1 sm:px-4 md:px-12">
             {/* Left Chevron Button */}
             <div className="pointer-events-auto">
               <Magnetic>
                 <button
                   onClick={handlePrev}
-                  className="p-4 rounded-full border border-white/10 bg-black/40 hover:bg-white/[0.08] hover:border-white/20 text-white transition-all duration-300 flex items-center justify-center shadow-2xl cursor-expand"
+                  className="p-2 sm:p-4 rounded-full border border-white/10 bg-black/40 hover:bg-white/[0.08] hover:border-white/20 text-white transition-all duration-300 flex items-center justify-center shadow-2xl cursor-expand"
                   aria-label="Previous Project"
                 >
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
@@ -113,10 +123,10 @@ export default function Projects() {
               <Magnetic>
                 <button
                   onClick={handleNext}
-                  className="p-4 rounded-full border border-white/10 bg-black/40 hover:bg-white/[0.08] hover:border-white/20 text-white transition-all duration-300 flex items-center justify-center shadow-2xl cursor-expand"
+                  className="p-2 sm:p-4 rounded-full border border-white/10 bg-black/40 hover:bg-white/[0.08] hover:border-white/20 text-white transition-all duration-300 flex items-center justify-center shadow-2xl cursor-expand"
                   aria-label="Next Project"
                 >
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
@@ -127,7 +137,7 @@ export default function Projects() {
           {/* 3D Scene Viewport */}
           <div
             className="relative w-full h-[300px] sm:h-[380px] md:h-[460px] flex items-center justify-center overflow-visible select-none"
-            style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
+            style={{ perspective: isMobile ? "800px" : "1400px", transformStyle: "preserve-3d" }}
           >
             {projects.map((project, index) => {
               // Calculate cyclic dynamic index offset from center card
@@ -144,16 +154,23 @@ export default function Projects() {
 
               // Compute responsive position values
               let xPos = "0%";
-              if (offset === -1) xPos = "-34%";
-              if (offset === 1) xPos = "34%";
+              if (!isMobile) {
+                if (offset === -1) xPos = "-34%";
+                if (offset === 1) xPos = "34%";
+              } else {
+                if (offset === -1) xPos = "-15px";
+                if (offset === 1) xPos = "15px";
+              }
 
               let rotateY = 0;
-              if (offset === -1) rotateY = 22;
-              if (offset === 1) rotateY = -22;
+              if (!isMobile) {
+                if (offset === -1) rotateY = 22;
+                if (offset === 1) rotateY = -22;
+              }
 
               let scale = isActive ? 1.0 : 0.76;
               let zIndex = isActive ? 30 : 10;
-              let opacity = isActive ? 1 : 0.35;
+              let opacity = isActive ? 1 : (isMobile ? 0 : 0.35);
               let blurFilter = isActive ? "brightness(100%) blur(0px)" : "brightness(35%) blur(2px)";
 
               return (
@@ -181,7 +198,7 @@ export default function Projects() {
                       setActiveIndex(index);
                     }
                   }}
-                  className={`absolute w-[280px] sm:w-[380px] md:w-[500px] h-[200px] sm:h-[260px] md:h-[330px] overflow-hidden border border-white/10 bg-black/60 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-colors duration-500 flex flex-col justify-end group ${isActive ? "cursor-default" : "cursor-pointer hover:border-white/20"
+                  className={`absolute w-[280px] sm:w-[380px] md:w-[500px] h-[200px] sm:h-[260px] md:h-[330px] overflow-hidden border border-white/10 bg-black/60 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-colors duration-500 flex flex-col justify-end group ${isActive ? "cursor-default" : (isMobile ? "pointer-events-none" : "cursor-pointer hover:border-white/20")
                     }`}
                 >
                   {/* Background Project Cover Image */}
@@ -257,7 +274,7 @@ export default function Projects() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="w-full max-w-4xl mt-12 md:mt-16 bg-white/[0.02] backdrop-blur-md border border-white/[0.06] rounded-2xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-12 relative overflow-hidden"
+            className="w-full max-w-4xl mt-12 md:mt-16 bg-white/[0.02] backdrop-blur-md border border-white/[0.06] rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-12 relative overflow-hidden"
           >
             {/* Ambient Background Glow matching the active project's color */}
             <div
@@ -283,11 +300,11 @@ export default function Projects() {
               <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-gray-400 mb-4">
                 Tools Used
               </h4>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2.5">
                 {projects[activeIndex].tools.map((tool) => (
                   <span
                     key={tool}
-                    className="px-3.5 py-1.5 rounded-lg text-xs font-medium border border-white/10 bg-white/[0.03] text-gray-300 hover:border-white/20 transition-all duration-300 hover:bg-white/[0.06] cursor-default"
+                    className="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-lg text-xs font-medium border border-white/10 bg-white/[0.03] text-gray-300 hover:border-white/20 transition-all duration-300 hover:bg-white/[0.06] cursor-default"
                   >
                     {tool}
                   </span>
