@@ -10,7 +10,6 @@ import Skills from './components/Skills/Skills';
 import Experience from './components/Experience/Experience';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
-import Cursor from './components/Cursor/Cursor';
 import Preloader from './components/Preloader/Preloader';
 
 function AppContent() {
@@ -19,7 +18,6 @@ function AppContent() {
 
   return (
     <>
-      <Cursor />
       
       <AnimatePresence mode="wait">
         {isLoading && <Preloader key="preloader" onComplete={() => setIsLoading(false)} />}

@@ -14,11 +14,9 @@
   body {
     @apply bg-bg-deep text-text-primary font-sans antialiased overflow-x-hidden;
     background-color: var(--color-bg-deep);
-    cursor: none;
   }
   
   a, button {
-    cursor: none;
   }
   
   ::selection {
