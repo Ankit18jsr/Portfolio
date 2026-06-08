@@ -5,17 +5,37 @@ import Particles from './Particles';
 export default function AuraBackground() {
   const { scrollYProgress } = useScroll();
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    let ticked = false;
     const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
+      if (ticked) return;
+      ticked = true;
+      window.requestAnimationFrame(() => {
+        setMousePosition({
+          x: (e.clientX / window.innerWidth) * 100,
+          y: (e.clientY / window.innerHeight) * 100,
+        });
+        ticked = false;
       });
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isMobile]);
 
   // Map scroll progress to a hue rotation or shift
   const yPos1 = useTransform(scrollYProgress, [0, 1], ['-20%', '80%']);
@@ -28,7 +48,7 @@ export default function AuraBackground() {
       {/* Unique 3D Perspective Grid */}
       <div className="absolute inset-0 z-0 flex items-center justify-center perspective-[2000px] opacity-[0.15] mix-blend-overlay">
         <motion.div 
-          className="w-[200vw] h-[200vh]"
+          className="w-[200vw] h-[240vh]"
           style={{
             backgroundImage: `
               linear-gradient(to right, #ffffff 1px, transparent 1px),
@@ -39,7 +59,7 @@ export default function AuraBackground() {
             translateY: '20%',
           }}
           animate={{
-            backgroundPosition: ['0rem 0rem', '0rem 4rem']
+            y: [0, -64]
           }}
           transition={{
             repeat: Infinity,
@@ -56,13 +76,13 @@ export default function AuraBackground() {
       
       {/* Interactive Aurora 1 - Oceanic Cyan */}
       <motion.div
-        className="absolute w-[90vw] h-[90vw] max-w-[900px] max-h-[900px] rounded-full blur-[120px] md:blur-[160px] opacity-25 mix-blend-screen z-10"
+        className="absolute w-[90vw] h-[90vw] max-w-[900px] max-h-[900px] rounded-full blur-[60px] sm:blur-[120px] md:blur-[160px] opacity-25 mix-blend-screen z-10"
         style={{
           background: 'radial-gradient(circle, rgba(45,212,191,0.6) 0%, rgba(15,118,110,0) 70%)',
           left: `calc(${mousePosition.x}% - 450px)`,
           top: yPos1,
         }}
-        animate={{
+        animate={isMobile ? {} : {
           x: [0, 40, -30, 0],
           y: [0, -50, 30, 0],
           scale: [1, 1.1, 0.9, 1]
@@ -72,13 +92,13 @@ export default function AuraBackground() {
       
       {/* Interactive Aurora 2 - Deep Violet / Blue */}
       <motion.div
-        className="absolute w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] rounded-full blur-[100px] md:blur-[140px] opacity-30 mix-blend-screen z-10"
+        className="absolute w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] rounded-full blur-[50px] sm:blur-[100px] md:blur-[140px] opacity-30 mix-blend-screen z-10"
         style={{
           background: 'radial-gradient(circle, rgba(59,130,246,0.6) 0%, rgba(30,58,138,0) 70%)',
           right: `calc(${100 - mousePosition.x}% - 400px)`,
           top: yPos2,
         }}
-        animate={{
+        animate={isMobile ? {} : {
           x: [0, -50, 40, 0],
           y: [0, 40, -30, 0],
           scale: [1, 1.2, 0.8, 1]
@@ -88,12 +108,12 @@ export default function AuraBackground() {
 
       {/* Interactive Aurora 3 - Silver/White Core */}
       <motion.div
-        className="absolute w-[100vw] h-[60vw] max-w-[1000px] max-h-[600px] rounded-full blur-[120px] md:blur-[150px] opacity-10 mix-blend-screen left-1/2 -translate-x-1/2 z-10"
+        className="absolute w-[100vw] h-[60vw] max-w-[1000px] max-h-[600px] rounded-full blur-[60px] sm:blur-[120px] md:blur-[150px] opacity-10 mix-blend-screen left-1/2 -translate-x-1/2 z-10"
         style={{
           background: 'radial-gradient(ellipse, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%)',
           top: yPos3,
         }}
-        animate={{
+        animate={isMobile ? {} : {
           scale: [1, 1.3, 1],
           opacity: [0.05, 0.15, 0.05],
         }}
