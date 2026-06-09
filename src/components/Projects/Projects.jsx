@@ -13,7 +13,7 @@ const projects = [
     category: 'Data Analytics',
     color: '#10b981',
     image: weatherDashboardImg,
-    link: '#',
+    link: 'https://www.linkedin.com/posts/ankit-kumar-6450b620b_powerbi-dataanalytics-weatheranalytics-activity-7470041489029623809-Wvmp?utm_source=share&utm_medium=member_desktop&rcm=ACoAADU61xUBLJFM9Wn-yWLgyKN0CdvTDdG4iyY',
     description: 'Built an interactive Weather Dashboard in Power BI to analyze temperature, humidity, wind speed, and precipitation trends, etc. Used DAX formulas for calculated measures, KPI indicators, and time-based analysis, creating dynamic reports with interactive filters and visualizations.',
     tools: ['Python', 'OpenWeatherMap API', 'PowerBI', 'DAX Formulas', 'KPI Indicators', 'Time-Based Analysis', 'Interactive Filters', 'Visualizations']
   },
@@ -110,7 +110,7 @@ export default function Projects() {
                 className="w-full bg-white/[0.02] backdrop-blur-md border border-white/[0.06] rounded-2xl overflow-hidden flex flex-col relative"
               >
                 {/* Ambient Background Glow matching the project's color */}
-                <div 
+                <div
                   className="absolute -top-24 -left-24 w-48 h-48 rounded-full blur-[100px] opacity-15 pointer-events-none"
                   style={{ backgroundColor: project.color }}
                 />
