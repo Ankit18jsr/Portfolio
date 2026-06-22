@@ -43,7 +43,7 @@ const projects = [
     category: 'Web Development',
     color: '#0b8cf5ff',
     image: onlineImg,
-    link: 'https://online-quiz-platform-navy.vercel.app/',
+    link: 'https://online-quiz-platform-mauve.vercel.app/',
     description: 'Developed a full-stack Online Quiz Platform that enables users to participate in quizzes, track scores, and evaluate their knowledge across various topics. The platform features secure user authentication, timed quizzes, automatic score calculation, result tracking, and an admin panel for managing quiz questions and categories. Designed a responsive user interface to ensure a seamless experience across devices.',
     tools: ['React', 'Vite', 'MongoDB', 'Tailwind CSS', 'Framer Motion', 'Node.js', 'Express.js', 'JWT Authentication']
   }
