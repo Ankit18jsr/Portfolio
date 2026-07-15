@@ -78,7 +78,7 @@ export default function Hero() {
         >
           <Magnetic>
             <a
-              href="https://drive.google.com/file/d/17wvVLJuabJJASetMHkLgktd5C6_7uQ0d/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1MhZtc6kFuWoivV7b1tU6IBPRkOkP19pP/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-4.5 py-2.5 bg-white/5 border border-white/10 rounded-full text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-white hover:bg-white hover:text-black hover:border-white transition-all duration-500 backdrop-blur-md cursor-expand shadow-[0_4px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_10px_35px_rgba(255,255,255,0.15)] group"

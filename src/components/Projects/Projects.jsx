@@ -5,10 +5,21 @@ import weatherDashboardImg from '../../assets/weather_dashboard.png';
 import movieRecommendationImg from '../../assets/movie_recommendation_system.png';
 import skillbridgeImg from '../../assets/skillbridge.png';
 import onlineImg from '../../assets/online.png';
+import customerImg from '../../assets/customer_churn.png';
 
 const projects = [
   {
     id: 1,
+    title: 'Customer Churn Analytics & Retention Strategy',
+    category: 'Data Analytics, SQL, Power BI',
+    color: '#10b981',
+    image: customerImg,
+    link: 'https://www.linkedin.com/posts/ankit-kumar-6450b620b_dataanalytics-dataanalyst-python-ugcPost-7482463999926886400-qhoa/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADU61xUBLJFM9Wn-yWLgyKN0CdvTDdG4iyY',
+    description: 'Customer churn is a major challenge for telecom companies, as losing existing customers directly impacts revenue and increases customer acquisition costs. This project was developed to analyze customer behavior, identify the key factors contributing to churn, and provide actionable retention strategies through interactive dashboards and business insights.',
+    tools: ['Python', 'MySQL', 'PowerBI', 'DAX Formulas', 'KPI Indicators', 'Pandas','NumPy' ]
+  }, 
+  {
+    id: 2,
     title: 'WEATHER DASHBOARD',
     category: 'Data Analytics',
     color: '#10b981',
@@ -18,7 +29,7 @@ const projects = [
     tools: ['Python', 'OpenWeatherMap API', 'PowerBI', 'DAX Formulas', 'KPI Indicators', 'Time-Based Analysis', 'Interactive Filters', 'Visualizations']
   },
   {
-    id: 2,
+    id: 3,
     title: 'MOVIE RECOMMENDATION SYSTEM',
     category: 'Data Science',
     color: '#f59e0b',
@@ -28,7 +39,7 @@ const projects = [
     tools: ['Python', 'Streamlit', 'Scikit-learn', 'TMDB API', 'Pandas', 'Numpy', 'Cosine Similarity']
   },
   {
-    id: 3,
+    id: 4,
     title: 'SKILL BRIDGE',
     category: 'Web Development',
     color: '#0b8cf5ff',
@@ -38,7 +49,7 @@ const projects = [
     tools: ['React', 'Vite', 'MongoDB', 'Tailwind CSS', 'Framer Motion', 'Node.js', 'Express.js', 'JWT Authentication']
   },
   {
-    id: 4,
+    id: 5,
     title: 'Online Quiz Platform',
     category: 'Web Development',
     color: '#0b8cf5ff',
