@@ -5,7 +5,7 @@ import weatherDashboardImg from '../../assets/weather_dashboard.png';
 import movieRecommendationImg from '../../assets/movie_recommendation_system.png';
 import skillbridgeImg from '../../assets/skillbridge.png';
 import onlineImg from '../../assets/online.png';
-import customerImg from '../../assets/customer_churn.png';
+import customerImg from '../../assets/customer.jpg';
 
 const projects = [
   {
